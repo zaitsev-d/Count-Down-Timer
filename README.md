@@ -1,2 +1,2 @@
 # Count-Down-Timer
-Is a program, which counting-dwon time to holiday.
+Is a program, which counting-down time to holiday.
