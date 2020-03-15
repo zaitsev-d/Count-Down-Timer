@@ -13,7 +13,7 @@
         </LinearGradientBrush>
     </Window.Background>
 
-    <Grid>
+    <Grid Loaded="Grid_Loaded">
         <Ellipse Stroke="White" StrokeThickness="2" Height="100" Width ="100" Margin="300,45,300,415"/>
         <Ellipse Stroke="White" StrokeThickness="7" Height="100" Width ="100" Margin="300,45,300,415"/>
         <Image Source="pack://application:,,,/Assets/birthday-cake.png" HorizontalAlignment="Center" Width="40" Height="50" Margin="330,89,330,461"/>
@@ -34,7 +34,7 @@
         </Grid>
 
         <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Width="500" Height="130" Margin="95,307,95,163">
-            <Label Content="365 : 24 : 60 : 60" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="65" FontFamily="Nirmala UI"/>
+            <TextBlock Name="CountDownTimer" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="55" FontFamily="Nirmala UI"/>
         </Grid>
 
         <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Width="500" Height="130" Margin="95,307,95,163">
