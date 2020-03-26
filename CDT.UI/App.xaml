@@ -4,43 +4,13 @@
              xmlns:local="clr-namespace:CDT.UI"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <Style x:Key="MyButton" TargetType="Button">
-            <Setter Property="OverridesDefaultStyle" Value="True" />
-            <Setter Property="Cursor" Value="Hand" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Name="border" BorderThickness="0" BorderBrush="Black" Background="{TemplateBinding Background}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Opacity" Value="0.8" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style x:Key="RoundButtomTemplate" TargetType="Button" BasedOn="{StaticResource MyButton}">
-            <Setter Property="Background" Value="White"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Ellipse Width="30" Height="30" Stroke="White" StrokeThickness="1" VerticalAlignment="Center" RenderTransformOrigin="0.488,0.464">
-                            <Ellipse.Fill>
-                                <ImageBrush ImageSource="pack://application:,,,/Assets/birthday-cake.png" />
-                            </Ellipse.Fill>
-                            <Ellipse.Effect>
-                                <DropShadowEffect BlurRadius="20" Direction="0" RenderingBias="Quality" ShadowDepth="1" Color="#FFBBBBBB" />
-                            </Ellipse.Effect>
-                        </Ellipse>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

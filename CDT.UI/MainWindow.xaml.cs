@@ -23,16 +23,13 @@ namespace CDT.UI
     public partial class MainWindow : Window
     {
         List<Holiday> holidays = new List<Holiday>();
-        DateTime currentDate;
-        DateTime nextYear;
-        DateTime bd_test;
-        int days, hours, minutes, seconds;
-        DispatcherTimer timer1;
+        CDTCore cDTCore = new CDTCore();
 
         public MainWindow()
         {
             InitializeComponent();
-            timer1 = new DispatcherTimer();
+            
+            var timer1 = new DispatcherTimer();
             timer1.Interval = new TimeSpan(0, 0, 1);
             timer1.Tick += Timer_Tick;
             timer1.Start();
@@ -46,42 +43,38 @@ namespace CDT.UI
             }
         }
 
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
-            bd_test = new DateTime(1993, 6, 25);
+           DateTime bd_test = new DateTime(1993, 6, 25);
             var birthday = new Holiday("Birthday", bd_test);
             holidays.Add(birthday);
 
-            currentDate = DateTime.Now;
-            nextYear = bd_test.AddYears(currentDate.Year - bd_test.Year);
-
-            if (nextYear < currentDate)
-            {
-                if (!DateTime.IsLeapYear(nextYear.Year + 1))
-                    nextYear = nextYear.AddYears(1);
-                else
-                    nextYear = new DateTime(nextYear.Year + 1, bd_test.Month, bd_test.Day);
-            }
-
-            days = (nextYear - currentDate).Days;
-            hours = (nextYear - currentDate).Hours;
-            minutes = (nextYear - currentDate).Minutes;
-            seconds = (nextYear - currentDate).Seconds;
+            cDTCore.CounterBuilder(bd_test);
         }
 
-        private void Timer_Tick( Object s, EventArgs e)
+        private void Timer_Tick(Object s, EventArgs e)
         {
-            if(hours == 0) days--;
-            if (minutes == 0) hours--;
-            if (seconds == 0) minutes--;
+            if (cDTCore.Hours == 0)
+            {
+                cDTCore.Days--;
+                Progress.Value += 1;
+            }
+            if (cDTCore.Minutes == 0) cDTCore.Hours--;
+            if (cDTCore.Seconds == 0) cDTCore.Minutes--;
 
-            if (seconds <= 0) seconds = 59;
-            else seconds--;
+            if (cDTCore.Seconds <= 0) cDTCore.Seconds = 59;
+            else cDTCore.Seconds--;
 
-            if (hours < 0) hours = 23;
-            if (minutes < 0) minutes = 59;
+            if (cDTCore.Hours <= 0) cDTCore.Hours = 23;
+            if (cDTCore.Minutes <= 0) cDTCore.Minutes = 59;
 
-            CountDownTimer.Text = string.Format($"{days} : {hours} : {minutes} : {seconds}");
+            CountDownTimer.Text = string.Format($"{cDTCore.Days} : {cDTCore.Hours} : {cDTCore.Minutes} : {cDTCore.Seconds}");
+            Progress.Value = cDTCore.Days;
         }
     }
 }

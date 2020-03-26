@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CDT.UI"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="700" AllowsTransparency="True" WindowStyle="None" MouseMove="Window_MouseMove">
     <Window.Background>
@@ -13,13 +14,19 @@
         </LinearGradientBrush>
     </Window.Background>
 
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
     <Grid Loaded="Grid_Loaded">
-        <Ellipse Stroke="White" StrokeThickness="2" Height="100" Width ="100" Margin="300,45,300,415"/>
-        <Ellipse Stroke="White" StrokeThickness="7" Height="100" Width ="100" Margin="300,45,300,415"/>
         <Image Source="pack://application:,,,/Assets/birthday-cake.png" HorizontalAlignment="Center" Width="40" Height="50" Margin="330,89,330,461"/>
 
         <Grid VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10" Width="20" Height="20">
-            <Button BorderBrush="{x:Null}" Foreground="{x:Null}" Background="{x:Null}" Style="{StaticResource MyButton}">
+            <Button BorderBrush="{x:Null}" Foreground="{x:Null}" Background="{x:Null}" Style="{StaticResource MyButton}" Click="CloseButton_Click">
                 <Image Source="pack://application:,,,/Assets/cancel.png">
                     <Image.Effect>
                         <DropShadowEffect Color="Black" Direction="220" ShadowDepth="2" Opacity=".3"/>
@@ -28,6 +35,22 @@
             </Button>
         </Grid>
 
+        <ProgressBar Height="Auto" Width="100" Foreground="White" x:Name="Progress" Margin="300,65,300,435" IsIndeterminate="True">
+            <ProgressBar.Style>
+                <Style TargetType="ProgressBar" BasedOn="{StaticResource MaterialDesignCircularProgressBar}">
+                    <Style.Triggers>
+                        <EventTrigger RoutedEvent="Loaded">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetProperty="Value" From="0" To="70" Duration="0:0:0.5"></DoubleAnimation>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ProgressBar.Style>
+        </ProgressBar>
+
         <Grid VerticalAlignment="Top" Margin="200,177,200,0" Width="300" Height="130">
             <Label Content="My Birthday" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="5" Foreground="White" FontSize="40" FontFamily="Nirmala UI"/>
             <Label Content="Count down to my birthday" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Margin="5" Foreground="White" FontSize="20" FontFamily="Comic Sans MS"/>
@@ -35,13 +58,10 @@
 
         <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Width="500" Height="130" Margin="95,307,95,163">
             <TextBlock Name="CountDownTimer" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="55" FontFamily="Nirmala UI"/>
-        </Grid>
-
-        <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Width="500" Height="130" Margin="95,307,95,163">
-            <Label Content="DAYS" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="15" FontFamily="Nirmala UI" Margin="36,98,396,-11"/>
-            <Label Content="HOURS" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="15" FontFamily="Nirmala UI" Margin="175,98,265,0" Width="60"/>
-            <Label Content="MINUTES" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="15" FontFamily="Nirmala UI" Margin="289,98,134,0" Width="77"/>
-            <Label Content="SECONDS" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="15" FontFamily="Nirmala UI" Margin="411,98,10,0" Width="79"/>
+            <Label Content="DAYS" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="15" FontFamily="Nirmala UI" Margin="88,77,367,0" Width="45"/>
+            <Label Content="HOURS" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="15" FontFamily="Nirmala UI" Margin="171,77,267,0" Width="62"/>
+            <Label Content="MINUTES" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="15" FontFamily="Nirmala UI" Margin="252,77,174,0" Width="74"/>
+            <Label Content="SECONDS" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="15" FontFamily="Nirmala UI" Margin="350,77,74,0" Width="76"/>
         </Grid>
 
         <Button Style="{StaticResource RoundButtomTemplate}" Width="30" Height="30" Margin="100,542,570,28"/>
